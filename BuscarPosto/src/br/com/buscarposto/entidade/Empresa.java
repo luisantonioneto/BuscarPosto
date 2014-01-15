@@ -14,7 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
-
+//Testar
 public class Empresa implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
