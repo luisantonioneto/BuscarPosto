@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="buscarPosto" transaction-type="RESOURCE_LOCAL">
+		<!-- provedor/implementacao do JPA -->
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		
+		<!--  entidades mapeadas -->
+		<class>br.com.buscarposto.entidade.Usuario</class>
+		<class>br.com.buscarposto.entidade.Empresa</class>
+		
+		<properties>
+			<!-- nome do usuário do banco de dados -->
+			<property name="hibernate.connection.username" value="postgres"/>
+			<!-- driver de conexao com o banco -->
+			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+			<!-- senha do usuário -->
+			<property name="hibernate.connection.password" value="12345"/>
+			<!-- url de conexao -->
+			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost/buscarPosto"/>
+			<!-- dialeto -->
+			<property name="hibernate.connection.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+			<!-- exibir o SQL gerado no console -->
+			<property name="hibernate.show_sql" value="true" />
+  			<property name="hibernate.format_sql" value="true" />
+			<!-- modo -->
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+		</properties>
+	</persistence-unit>
+</persistence>
