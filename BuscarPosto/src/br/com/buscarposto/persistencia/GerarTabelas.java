@@ -22,5 +22,3 @@ public class GerarTabelas {
 		factory.close();
 	}
 }
-
-// Testando commit
