@@ -23,7 +23,6 @@ public class Empresa implements Serializable {
 	private String CNPJ;
 	private String nomeFantasia;
 	//private String localizacao;
-	//teste
 	
 	@ManyToMany(
 			fetch=FetchType.LAZY
