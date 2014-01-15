@@ -3,6 +3,7 @@ package br.com.buscarposto.entidade;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,8 +24,8 @@ public class Empresa implements Serializable {
 	private String nomeFantasia;
 	//private String localizacao;
 	
+	// Relacionamento Usuário <-> Empresa
 	@ManyToMany(
-			targetEntity = Combustivel.class,
 			fetch=FetchType.LAZY
 	)
 	@JoinTable(
@@ -32,14 +33,47 @@ public class Empresa implements Serializable {
 			joinColumns={@JoinColumn(name="codEmpresa")},
 			inverseJoinColumns={@JoinColumn(name="codUsuario")}
 	)
-	private Collection<Usuario> usuarios;
+	private Collection<Usuario> usuario;
 	
+
+	// Relacionamento Empresa <-> Combustivel	
+	@ManyToMany(
+			targetEntity = Combustivel.class,
+			fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL
+	)
 	@JoinTable(
 			name="relEmpresa",
 			joinColumns = {@JoinColumn(name = "codEmpresa")},
 			inverseJoinColumns = {@JoinColumn(name = "codCombustivel")}
 	)
-	private Collection<Combustivel> combustiveis;
+	private Collection<Combustivel> combustivel;
+	
+	// Relacionamento Empresa <-> Serviço 
+	@ManyToMany(
+			targetEntity = Servico.class,
+			fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL
+	)
+	@JoinTable(
+			name="relEmpresa",
+			joinColumns = {@JoinColumn(name = "codEmpresa")},
+			inverseJoinColumns = {@JoinColumn(name = "codServico")}
+	)
+	private Collection<Servico> servico;
+	
+	// Relacionamento Empresa <-> Conveniencia
+	@ManyToMany(
+			targetEntity = Conveniencia.class,
+			fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL
+	)
+	@JoinTable(
+			name="relEmpresa",
+			joinColumns = {@JoinColumn(name = "codEmpresa")},
+			inverseJoinColumns = {@JoinColumn(name = "codConveniencia")}
+	)
+	private Collection<Conveniencia> conveniencia;
 	
 
 	public int getCodEmpresa() {

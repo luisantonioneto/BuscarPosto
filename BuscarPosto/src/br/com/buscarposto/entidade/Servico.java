@@ -1,10 +1,32 @@
 package br.com.buscarposto.entidade;
 
+import java.util.Collection;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+@Entity
+
 public class Servico {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codServico;
 	private String nome;
 	private float preco;
 	private String descricao;
+	
+	@ManyToMany
+	@JoinTable(
+			name="relEmpresa",
+			joinColumns={@JoinColumn(name="codServico")},
+			inverseJoinColumns={@JoinColumn(name="codEmpresa")}
+	)
+	private Collection<Empresa> empresas;
 	
 	public int getCodServico() {
 		return codServico;

@@ -22,10 +22,8 @@ public class Combustivel implements Serializable{
 	private String nome;
 	private float preco;
 	private Calendar dataAtualizacao;
-	// Teste
 	
 	@ManyToMany(
-			targetEntity = Empresa.class,
 			fetch=FetchType.LAZY
 	)
 	@JoinTable(

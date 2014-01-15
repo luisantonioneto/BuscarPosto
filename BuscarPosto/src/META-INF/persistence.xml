@@ -7,6 +7,9 @@
 		<!--  entidades mapeadas -->
 		<class>br.com.buscarposto.entidade.Usuario</class>
 		<class>br.com.buscarposto.entidade.Empresa</class>
+		<class>br.com.buscarposto.entidade.Combustivel</class>
+		<class>br.com.buscarposto.entidade.Servico</class>
+		<class>br.com.buscarposto.entidade.Conveniencia</class>
 		
 		<properties>
 			<!-- nome do usuário do banco de dados -->
