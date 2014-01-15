@@ -2,7 +2,6 @@ package br.com.buscarposto.entidade;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,6 +24,7 @@ public class Empresa implements Serializable {
 	//private String localizacao;
 	
 	@ManyToMany(
+			targetEntity = Combustivel.class,
 			fetch=FetchType.LAZY
 	)
 	@JoinTable(
@@ -32,7 +32,14 @@ public class Empresa implements Serializable {
 			joinColumns={@JoinColumn(name="codEmpresa")},
 			inverseJoinColumns={@JoinColumn(name="codUsuario")}
 	)
-	private Collection<Usuario> usuarios;	
+	private Collection<Usuario> usuarios;
+	
+	@JoinTable(
+			name="relEmpresa",
+			joinColumns = {@JoinColumn(name = "codEmpresa")},
+			inverseJoinColumns = {@JoinColumn(name = "codCombustivel")}
+	)
+	private Collection<Combustivel> combustiveis;
 	
 
 	public int getCodEmpresa() {

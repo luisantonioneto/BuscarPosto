@@ -2,6 +2,7 @@ package br.com.buscarposto.persistencia;
 
 import javax.persistence.*;
 
+import br.com.buscarposto.entidade.Combustivel;
 import br.com.buscarposto.entidade.Empresa;
 import br.com.buscarposto.entidade.Usuario;
 
@@ -12,6 +13,7 @@ public class GerarTabelas {
 		
 		Usuario usuario = new Usuario();
 		Empresa empresa = new Empresa();
+		Combustivel combustivel = new Combustivel();
 
 		factory.close();
 	}

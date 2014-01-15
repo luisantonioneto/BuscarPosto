@@ -1,12 +1,39 @@
 package br.com.buscarposto.entidade;
 
+import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Collection;
 
-public class Combustivel {
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+@Entity
+
+public class Combustivel implements Serializable{
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codCombustivel;
 	private String nome;
 	private float preco;
 	private Calendar dataAtualizacao;
+	// Teste
+	
+	@ManyToMany(
+			targetEntity = Empresa.class,
+			fetch=FetchType.LAZY
+	)
+	@JoinTable(
+			name="relEmpresa",
+			joinColumns={@JoinColumn(name="codCombustivel")},
+			inverseJoinColumns={@JoinColumn(name="codEmpresa")}
+	)
+	private Collection<Empresa> empresas;
 	
 	public int getCodCombustivel() {
 		return codCombustivel;
