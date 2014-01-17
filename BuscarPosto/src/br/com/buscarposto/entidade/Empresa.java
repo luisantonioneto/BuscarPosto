@@ -3,6 +3,7 @@ package br.com.buscarposto.entidade;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.faces.bean.ManagedBean;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,8 +13,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
+@ManagedBean
 
 public class Empresa implements Serializable {
 	@Id
@@ -23,6 +30,13 @@ public class Empresa implements Serializable {
 	private String CNPJ;
 	private String nomeFantasia;
 	//private String localizacao;
+	
+	// Relacionameto Empresa <-> Endereco
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="codEndereco")
+	@Fetch(FetchMode.SELECT)
+	@Cascade(org.hibernate.annotations.CascadeType.MERGE)
+	private  Endereco endereco;
 	
 	// Relacionamento Usuário <-> Empresa
 	@ManyToMany(
@@ -49,7 +63,7 @@ public class Empresa implements Serializable {
 	)
 	private Collection<Combustivel> combustivel;
 	
-	// Relacionamento Empresa <-> Serviço 
+	// Relacionamento Empresa <-> Serviço
 	@ManyToMany(
 			targetEntity = Servico.class,
 			fetch = FetchType.LAZY,
@@ -75,7 +89,7 @@ public class Empresa implements Serializable {
 	)
 	private Collection<Conveniencia> conveniencia;
 	
-
+	
 	public int getCodEmpresa() {
 		return codEmpresa;
 	}
