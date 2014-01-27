@@ -22,7 +22,7 @@ public class Conveniencia {
 			fetch = FetchType.LAZY
 	)
 	@JoinTable(
-			name="relEmpresa",
+			name="relEmpresaConveniencia",
 			joinColumns = {@JoinColumn(name="codConveniencia")},
 			inverseJoinColumns= {@JoinColumn(name="codEmpresa")}
 	)

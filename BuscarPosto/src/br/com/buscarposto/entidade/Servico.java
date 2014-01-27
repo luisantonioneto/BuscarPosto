@@ -22,7 +22,7 @@ public class Servico {
 	
 	@ManyToMany
 	@JoinTable(
-			name="relEmpresa",
+			name="relEmpresaServico",
 			joinColumns={@JoinColumn(name="codServico")},
 			inverseJoinColumns={@JoinColumn(name="codEmpresa")}
 	)

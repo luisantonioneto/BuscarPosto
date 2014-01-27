@@ -27,7 +27,7 @@ public class Combustivel implements Serializable{
 			fetch=FetchType.LAZY
 	)
 	@JoinTable(
-			name="relEmpresa",
+			name="relEmpresaCombustivel",
 			joinColumns={@JoinColumn(name="codCombustivel")},
 			inverseJoinColumns={@JoinColumn(name="codEmpresa")}
 	)

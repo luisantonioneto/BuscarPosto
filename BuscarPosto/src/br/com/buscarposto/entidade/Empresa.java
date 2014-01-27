@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.faces.bean.ManagedBean;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Type;
 
 @Entity
 @ManagedBean
@@ -29,7 +31,10 @@ public class Empresa implements Serializable {
 	private String razaoSocial;
 	private String CNPJ;
 	private String nomeFantasia;
-	//private String localizacao;
+	
+	@Type(type="org.hibernate.spatial.GeometryType")
+	@Column(columnDefinition="Geometry")
+	private Point localizacao;
 	
 	// Relacionameto Empresa <-> Endereco
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -50,14 +55,14 @@ public class Empresa implements Serializable {
 	private Collection<Usuario> usuario;
 	
 
-	// Relacionamento Empresa <-> Combustivel	
+	// Relacionamento Empresa <-> Combustivel
 	@ManyToMany(
 			targetEntity = Combustivel.class,
 			fetch = FetchType.LAZY,
 			cascade = CascadeType.ALL
 	)
 	@JoinTable(
-			name="relEmpresa",
+			name="relEmpresaCombustivel",
 			joinColumns = {@JoinColumn(name = "codEmpresa")},
 			inverseJoinColumns = {@JoinColumn(name = "codCombustivel")}
 	)
@@ -70,7 +75,7 @@ public class Empresa implements Serializable {
 			cascade = CascadeType.ALL
 	)
 	@JoinTable(
-			name="relEmpresa",
+			name="relEmpresaServico",
 			joinColumns = {@JoinColumn(name = "codEmpresa")},
 			inverseJoinColumns = {@JoinColumn(name = "codServico")}
 	)
@@ -83,7 +88,7 @@ public class Empresa implements Serializable {
 			cascade = CascadeType.ALL
 	)
 	@JoinTable(
-			name="relEmpresa",
+			name="relEmpresaConveniencia",
 			joinColumns = {@JoinColumn(name = "codEmpresa")},
 			inverseJoinColumns = {@JoinColumn(name = "codConveniencia")}
 	)
@@ -116,5 +121,13 @@ public class Empresa implements Serializable {
 
 	public void setNomeFantasia(String nomeFantasia) {
 		this.nomeFantasia = nomeFantasia;
+	}
+
+	public Point getLocalizacao() {
+		return localizacao;
+	}
+
+	public void setLocalizacao(Point localizacao) {
+		this.localizacao = localizacao;
 	}
 }

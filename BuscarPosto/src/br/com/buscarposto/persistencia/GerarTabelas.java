@@ -23,7 +23,7 @@ public class GerarTabelas {
 		Conveniencia conveniencia = new Conveniencia();
 		Cidade cidade = new Cidade();
 		Estado estado = new Estado();
-		Endereco enereco = new Endereco();
+		Endereco endereco = new Endereco();
 
 		factory.close();
 	}
